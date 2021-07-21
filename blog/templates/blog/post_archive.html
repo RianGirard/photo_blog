@@ -1,0 +1,12 @@
+{% extends "base.html" %} 
+
+{% block title %}Archives:{% endblock %}
+
+{% block content %} 
+    <h1 class="text-3xl text-indigo-500">Archives:</h1>    
+
+    {% for date in date_list %}
+        <a class="text-xl" href="/archive/{{ date.year }}/{{ date.month }}"><p class=" m-2">{{ date|date:"F Y" }}</p></a>
+    {% endfor %}
+
+{% endblock %} 

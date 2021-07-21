@@ -1,0 +1,31 @@
+{% extends "account/base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
+<!-- adapted from login component: https://tailwindcomponents.com/component/native-and-social-login-form -->
+
+<form id="signup_form" class="signup bg-white shadow-xl mb-4 flex flex-wrap justify-center" method="POST" action="{% url 'account_signup' %}">
+    {% csrf_token %}
+    <div class="w-full md:w-full bg-indigo-500 p-6 text-white">
+        <p class="mb-8 text-3xl flex items-center">
+            <svg width="32" height="32" viewBox="0 0 512 512" class="inline-block fill-current h-8 w-8 mr-2">
+                <path d="m64 496l0-256 48 0 0-80c0-71 57-128 128-128l16 0c71 0 128 57 128 128l0 80 48 0 0 256z m172-131l-12 83 48 0-12-83c12-5 20-17 20-30 0-18-14-32-32-32-18 0-32 14-32 32 0 13 8 25 20 30z m100-197c0-49-39-88-88-88-49 0-88 39-88 88l0 72 176 0z"/>
+            </svg>
+            Register
+        </p>
+        <!-- some Bootstrap and custom CSS mixed in with our Tailwind CSS; stylesheet links on base.html-->
+        <div class="container-fluid text-center" id="signup_form">
+            {{ form.as_p }} 
+        </div>
+        <!-- end Bootstrap -->
+        {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %} 
+        <button class="primaryAction block w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline" type="submit">Register &raquo;</button>
+        <hr>
+        <a class="block w-full text-lg text-right text-white hover:text-gray-300 no-underline" href="{% url 'account_login' %}">...or Login</a>
+    </div>
+</form>
+{% endblock %}

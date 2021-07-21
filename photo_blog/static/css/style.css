@@ -1,0 +1,10 @@
+#login_form input, #signup_form input{
+    width: 16rem;
+    height: 2.5rem;
+    padding-left:1rem;
+    font-size: 1.2rem;
+    color:black;
+}
+label {
+    display: none;
+}

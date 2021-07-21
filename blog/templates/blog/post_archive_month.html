@@ -1,0 +1,48 @@
+{% extends "base.html" %} 
+{% load thumbnail %}
+
+{% block title %}Archives:{% endblock %}
+
+{% block content %} 
+    <h1 class="text-xl text-indigo-500 m-2">{{ month|date:"F Y" }}</h1>    
+<!-- component adapted from: https://tailwindcomponents.com/component/post-artical -->
+    <ul>
+        {% for post in object_list %} 
+            <div class="max-w-4xl px-10 my-4 py-6 bg-white rounded-lg shadow-md" style="width: 50rem">
+                <div class="flex justify-between items-center">
+                    <p class="mt-2 text-gray-700 font-bold">{{ post.title }}</p>
+                    <span class="font-light text-gray-600">{{post.updated_at|date:"F j, Y, g:i:a"}}</span>
+                </div>
+                <div class="mt-2">
+                    <p class="mt-2 text-gray-600">{{ post.desc }}</p>
+                </div>
+                {% for photo in photos %}
+                    {% if photo.post == post %}
+                        <div class="mt-1 ml-2 text-sm">
+                            <a href="/media/{{ photo.file }}" target="_blank">photo</a> 
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <div class="flex justify-between items-center mt-4">
+                        <a class="text-blue-600 hover:underline" href="{% url 'blog:detail' post.id %}">Read more</a>
+                    <a class="flex items-center" href="{% url 'profiles:detail' post.author.username %}">
+                        {% thumbnail post.author.profile.image  "373x373" crop="center" as im %}
+                            <img class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" src="{{im.url}}" alt="avatar">
+                        {% endthumbnail %}
+                        <!-- thumbnail component from: https://github.com/jazzband/sorl-thumbnail -->
+                        <h1 class="text-gray-700 text-xl font-bold">{{ post.author.first_name }} {{ post.author.last_name }}</h1>
+                    </a>
+                </div>
+            </div>    
+        {% endfor %} 
+    </ul>
+    <p class="text-xl text-indigo-500 m-2">
+        {% if previous_month %}
+            Previous Month: &emsp; <a href="/archive/{{ previous_month.year }}/{{ previous_month.month }}" class="text-lg">{{ previous_month|date:"F Y" }}</a>
+        {% endif %}
+
+        {% if next_month %}
+        Next Month: &emsp;<a href="/archive/{{ next_month.year }}/{{ next_month.month }}" class="text-lg">{{ next_month|date:"F Y" }}</a>
+        {% endif %}
+    </p>
+{% endblock %} 

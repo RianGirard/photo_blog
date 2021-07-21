@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Confirm Delete Post{% endblock %} 
+
+{% block body %} 
+    <form method="POST" action="{% url 'blog:delete' post.id %}">
+        {% csrf_token %}
+        <p>Are you sure you want to delete <span class="font-bold">"{{ post.title }}"</span> from <span class="font-bold">{{ post.updated_at }}</span>?</p>
+        
+        <div>
+            <!-- component is from: https://tailwindcomponents.com/component/buttons-with-icons -->
+            <div class="flex items-center justify-center">
+                <div class="m-3">
+                    <button class="bg-green-600 text-gray-800 font-bold rounded border-b-2 border-green-900 hover:border-green-600 hover:bg-green-900 hover:text-white shadow-md py-2 px-6 inline-flex items-center" type="submit">
+                        <span class="mr-2">Delete Post</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="currentcolor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                        </svg>
+                    </button>
+                </div>
+        </div>
+        <hr>
+        <a class="text-gray-800 hover:text-white" href="/{{post.id}}">Back</a>
+    </form>
+
+{% endblock body %} 

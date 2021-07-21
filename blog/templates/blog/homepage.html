@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Photo Blog! Home{% endblock %}
+
+{% block body %}
+    {% if request.user.profile.blogger %}
+        <div class="border-2 border-blue-500 pl-4 pr-4">
+            DRAFT POSTS:
+            {% for post in unpub_posts %}
+                {% include "includes/post.html" with post=post show_detail_link=True %}
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div id="posts-container">      <!-- New Posts prepend into this list; see Main.js success for onclick .js-submit -->
+        {% for post in posts %}
+            {% include "includes/post.html" with post=post show_detail_link=True %}
+        {% endfor %}
+    </div>
+{% endblock %}

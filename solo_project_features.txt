@@ -1,0 +1,15 @@
+Features: 
+
+Built in Django
+Django-AllAuth for user/authentication
+Blog entries contain Title, Date, Description Text, Photo (optional), Posted By info, Time
+Detail Page will enable a Blog User to Like and/or Comment on a photo
+Blog entries can be Searched
+Blog Owners can set up a list of Links on the Main Page as desired
+New Post will be created by a modal that opens via JavaScript and uses AJAX to send into db
+User Profile page
+
+Nice to Have: 
+
+Feature for Blog Users to send an email message via Form to another Blog User
+Blog Archive section to access prior entries based on Year/Month history

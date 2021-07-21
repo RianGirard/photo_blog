@@ -1,0 +1,19 @@
+{% extends "base.html" %} 
+
+{% block title %}Archives:{% endblock %}
+
+{% block content %} 
+
+    <div class="text-xl text-indigo-500 m-2">  
+    {% for date in date_list %}
+        <a href="/archive/{{ date.year }}/{{ date.month }}"><p>{{ date|date:"F Y" }}</p></a>
+    {% endfor %}
+        <p>All:</p>
+    </div>  
+    <ul>
+        {% for post in object_list %} 
+            <a class="text-gray-900 text-lg" href="/{{ post.id }}"><li class="m-4">{{ post.author }}&emsp;on &ensp; {{ post.updated_at }}</li></a>
+        {% endfor %} 
+    </ul>
+
+{% endblock %} 
